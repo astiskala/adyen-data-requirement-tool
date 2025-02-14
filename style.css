@@ -111,7 +111,7 @@ body {
   }
   
   table td, table th {
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
   
   #samplePayload {
