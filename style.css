@@ -1,0 +1,229 @@
+/* style.css */
+
+/* Adyen docs style guidelines:
+   - White background, #0abf53 for accent
+   - Subtle grey (#e2e2e2) borders
+   - Minimal layout
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #fff;
+    color: #142033;
+  }
+  
+  h1 {
+    background-color: #0abf53;
+    color: #fff;
+    padding: 16px;
+    margin: 0 0 20px;
+    font-weight: 500;
+  }
+  
+  .container {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px 20px;
+  }
+  
+  .left-panel {
+    flex: 0 0 300px;
+    background-color: #f9f9f9;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    padding: 16px;
+  }
+  
+  .right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-block {
+    margin-bottom: 16px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  select,
+  input[type="checkbox"] {
+    margin-top: 4px;
+    font-size: 0.9rem;
+  }
+  
+  button {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0abf53;
+    color: #fff;
+    transition: background-color 0.2s;
+  }
+  
+  button:hover {
+    background-color: #0aa149;
+  }
+  
+  /* APM heading */
+  #apmContainer p {
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #fff;
+    font-size: 0.9rem;
+    table-layout: auto;
+  }
+  
+  table thead th {
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #e2e2e2;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  table tbody tr {
+    border-bottom: 1px solid #e2e2e2;
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    vertical-align: top;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  
+  table td, table th {
+    overflow-wrap: break-word;
+  }
+  
+  #samplePayload {
+    border: 1px solid #e2e2e2;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    padding: 10px;
+    white-space: pre;
+    font-size: 0.9rem;
+    overflow: auto;
+  }
+  
+  /* Usage pills */
+  .usage-pill {
+    display: inline-block;
+    background-color: #0abf53;
+    color: #fff;
+    border-radius: 12px;
+    padding: 4px 10px;
+    margin: 2px 4px 2px 0;
+    font-size: 0.75rem;
+    position: relative;
+    cursor: help;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color 0.15s;
+  }
+  
+  .usage-pill:hover {
+    background-color: #0aa149;
+  }
+  
+  .usage-pill:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 0;
+    bottom: -36px;
+    background-color: rgba(0,0,0,0.85);
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: normal;
+    z-index: 99;
+    max-width: 220px;
+  }
+  
+  /* Example color-coding based on usage text */
+  .usage-pill[data-usage*="Fraud"] {
+    background-color: #F44336; /* Red-ish */
+  }
+  .usage-pill[data-usage*="AML"] {
+    background-color: #607D8B; /* Blue-gray */
+  }
+  .usage-pill[data-usage*="3D Secure"] {
+    background-color: #E91E63; /* Pink */
+  }
+  .usage-pill[data-usage*="Payment Flow"] {
+    background-color: #66BB6A; /* Lighter green */
+  }
+  .usage-pill[data-usage*="Reporting"] {
+    background-color: #9C27B0; /* Purple */
+  }
+  .usage-pill[data-usage*="Tokenisation"] {
+    background-color: #FF9800; /* Orange */
+  }
+  .usage-pill[data-usage*="Minimal"] {
+    background-color: #0abf53;
+  }
+  .usage-pill[data-usage*="Compliance"] {
+    background-color: #455A64; /* Grayish */
+  }
+  .usage-pill[data-usage*="Payment method"] {
+    background-color: #29B6F6; /* Light Blue */
+  }
+  .usage-pill[data-usage*="Premium"] {
+    background-color: #8BC34A; /* Lighter green shade */
+  }
+  
+  /* Tabs */
+  .tabs-nav {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .tab-button {
+    background-color: #f4f4f4;
+    color: #142033;
+    border: 1px solid #e2e2e2;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-right: 6px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .tab-button:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .tab-button.active {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    box-shadow: inset 0 -2px 0 #fff;
+  }
+  
+  /* Tab content areas */
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  

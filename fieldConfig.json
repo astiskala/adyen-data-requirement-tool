@@ -1,0 +1,432 @@
+{
+    "fields": {
+      "merchantAccount": {
+        "description": "Your Adyen merchant account name.",
+        "sampleData": "TestMerchant",
+        "baseUsages": ["Payment Flow"]
+      },
+      "amount": {
+        "description": "Transaction amount object (value + currency).",
+        "sampleData": "{\"value\":1000,\"currency\":\"EUR\"}",
+        "baseUsages": ["Payment Flow"]
+      },
+      "returnUrl": {
+        "description": "URL to return the shopper after a redirect/3DS.",
+        "sampleData": "https://example.com/checkout/return",
+        "baseUsages": ["Payment Flow"]
+      },
+      "reference": {
+        "description": "Your reference for this payment (order ID).",
+        "sampleData": "Order12345",
+        "baseUsages": ["Payment Flow"]
+      },
+      "channel": {
+        "description": "The sales channel, e.g., Web or iOS.",
+        "sampleData": "Web",
+        "baseUsages": ["Payment Flow"]
+      },
+      "countryCode": {
+        "description": "Country of the shopper's billing address.",
+        "sampleData": "DE",
+        "baseUsages": ["Payment Flow", "3D Secure"]
+      },
+      "shopperLocale": {
+        "description": "Locale of the shopper for language/currency display.",
+        "sampleData": "en-US",
+        "baseUsages": ["Payment Flow"]
+      },
+  
+      "shopperEmail": {
+        "description": "Email of the shopper.",
+        "sampleData": "john.doe@example.com",
+        "baseUsages": ["Protect (Fraud detection)"]
+      },
+      "shopperReference": {
+        "description": "Unique shopper ID in your system.",
+        "sampleData": "shopper_123",
+        "baseUsages": ["Tokenisation"]
+      },
+      "shopperName": {
+        "description": "Name of the shopper.",
+        "sampleData": "John Doe",
+        "baseUsages": ["Protect (Fraud detection)"]
+      },
+      "telephoneNumber": {
+        "description": "Telephone number of the shopper.",
+        "sampleData": "+49123456789",
+        "baseUsages": ["Protect (Fraud detection)"]
+      },
+      "billingAddress": {
+        "description": "The billing address object.",
+        "sampleData": "{\"street\":\"Main St\",\"postalCode\":\"12345\",\"city\":\"Berlin\",\"country\":\"DE\"}",
+        "baseUsages": ["Compliance (AML/CTF)"]
+      },
+      "lineItems": {
+        "description": "List of purchased items with tax details.",
+        "sampleData": "[{\"id\":\"1\",\"quantity\":\"1\",\"description\":\"Product\",\"amountExcludingTax\":900,\"taxAmount\":100,\"amountIncludingTax\":1000,\"taxPercentage\":1000}]",
+        "baseUsages": ["Reporting"]
+      },
+      "dateOfBirth": {
+        "description": "Shopper's date of birth (YYYY-MM-DD).",
+        "sampleData": "1990-01-01",
+        "baseUsages": ["Compliance (AML/CTF)"]
+      }
+    },
+  
+    "usageDefinitions": {
+      "Payment Flow": "Used for core payment processing flow.",
+      "3D Secure": "Relevant for Strong Customer Authentication (SCA).",
+      "Protect (Fraud detection)": "Used by Adyen's risk engine to detect fraud.",
+      "Compliance (AML/CTF)": "Required for AML/CTF checks.",
+      "Tokenisation": "Used for storing payment details for future transactions.",
+      "Reporting": "Used for settlement and reconciliation reporting.",
+      "Minimal": "Part of the minimal required data set.",
+      "Protect Premium": "Additional data fields required for Adyen Protect Premium.",
+      "Payment method": "Field is required due to a specific APM.",
+      "Compliance": "Field is required due to industry compliance rules.",
+      "MPL": "Field is required for Adyen MarketPay (example usage)."
+    },
+  
+    "minimalFields": [
+      { "field": "merchantAccount", "reason": "Minimal" },
+      { "field": "amount",          "reason": "Minimal" },
+      { "field": "returnUrl",       "reason": "Minimal" },
+      { "field": "reference",       "reason": "Minimal" },
+      { "field": "channel",         "reason": "Minimal" },
+      { "field": "countryCode",     "reason": "Minimal" },
+      { "field": "shopperLocale",   "reason": "Minimal" }
+    ],
+  
+    "apms": [
+      {
+        "name": "BACS Direct Debit",
+        "countriesAvailable": ["GB"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: BACS" },
+          { "field": "shopperReference", "reason": "Payment method: BACS" },
+          { "field": "shopperName", "reason": "Payment method: BACS" },
+          { "field": "telephoneNumber", "reason": "Payment method: BACS" }
+        ]
+      },
+      {
+        "name": "Benefit",
+        "countriesAvailable": ["BH"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: Benefit" },
+          { "field": "shopperReference", "reason": "Payment method: Benefit" },
+          { "field": "shopperName", "reason": "Payment method: Benefit" },
+          { "field": "telephoneNumber", "reason": "Payment method: Benefit" }
+        ]
+      },
+      {
+        "name": "KNET",
+        "countriesAvailable": ["KW"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: KNET" },
+          { "field": "shopperReference", "reason": "Payment method: KNET" },
+          { "field": "shopperName", "reason": "Payment method: KNET" },
+          { "field": "telephoneNumber", "reason": "Payment method: KNET" }
+        ]
+      },
+      {
+        "name": "Online banking Finland",
+        "countriesAvailable": ["FI"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: Finland" },
+          { "field": "shopperReference", "reason": "Payment method: Finland" },
+          { "field": "shopperName", "reason": "Payment method: Finland" },
+          { "field": "telephoneNumber", "reason": "Payment method: Finland" }
+        ]
+      },
+      {
+        "name": "Online banking Poland (P24)",
+        "countriesAvailable": ["PL"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: P24" },
+          { "field": "shopperReference", "reason": "Payment method: P24" },
+          { "field": "shopperName", "reason": "Payment method: P24" },
+          { "field": "telephoneNumber", "reason": "Payment method: P24" }
+        ]
+      },
+      {
+        "name": "PaySafeCard",
+        "countriesAvailable": ["DE", "AT", "GB", "US", "CA", "NL"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: PaySafeCard" },
+          { "field": "shopperReference", "reason": "Payment method: PaySafeCard" },
+          { "field": "shopperName", "reason": "Payment method: PaySafeCard" },
+          { "field": "telephoneNumber", "reason": "Payment method: PaySafeCard" }
+        ]
+      },
+      {
+        "name": "Walley",
+        "countriesAvailable": ["SE", "NO", "FI"],
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Payment method: Walley" },
+          { "field": "shopperReference", "reason": "Payment method: Walley" },
+          { "field": "shopperName", "reason": "Payment method: Walley" },
+          { "field": "telephoneNumber", "reason": "Payment method: Walley" }
+        ]
+      },
+  
+      {
+        "name": "Affirm",
+        "countriesAvailable": ["US"],
+        "requiredFields": [
+          { "field": "billingAddress", "reason": "Payment method: Affirm" }
+        ]
+      },
+      {
+        "name": "Boleto Bancário",
+        "countriesAvailable": ["BR"],
+        "requiredFields": [
+          { "field": "billingAddress", "reason": "Payment method: Boleto Bancário" }
+        ]
+      },
+  
+      {
+        "name": "AfterPayTouch",
+        "countriesAvailable": ["DE", "NL", "AT", "FI"],
+        "requiredFields": [
+          { "field": "lineItems", "reason": "Payment method: AfterPayTouch" }
+        ]
+      },
+      {
+        "name": "Atome",
+        "countriesAvailable": ["SG", "HK", "MY"],
+        "requiredFields": [
+          { "field": "lineItems", "reason": "Payment method: Atome" }
+        ]
+      },
+      {
+        "name": "Klarna",
+        "countriesAvailable": ["SE", "NO", "FI", "DE", "AT", "NL"],
+        "requiredFields": [
+          { "field": "lineItems", "reason": "Payment method: Klarna" }
+        ]
+      },
+      {
+        "name": "Oney",
+        "countriesAvailable": ["FR", "ES"],
+        "requiredFields": [
+          { "field": "lineItems", "reason": "Payment method: Oney" }
+        ]
+      },
+      {
+        "name": "Zip",
+        "countriesAvailable": ["AU", "NZ"],
+        "requiredFields": [
+          { "field": "lineItems", "reason": "Payment method: Zip" }
+        ]
+      },
+  
+      {
+        "name": "PayBright",
+        "countriesAvailable": ["CA"],
+        "requiredFields": [
+          { "field": "dateOfBirth", "reason": "Payment method: PayBright" }
+        ]
+      },
+      {
+        "name": "Ratepay",
+        "countriesAvailable": ["DE", "AT", "CH"],
+        "requiredFields": [
+          { "field": "dateOfBirth", "reason": "Payment method: Ratepay" }
+        ]
+      },
+  
+      {
+        "name": "Other",
+        "countriesAvailable": ["AU", "US", "SG", "GB", "DE", "NL"],
+        "requiredFields": []
+      }
+    ],
+  
+    "industries": [
+      {
+        "key": "artDealers",
+        "label": "Art dealers, galleries and antiquities",
+        "requiredFields": [
+          { "field": "shopperName", "reason": "Compliance" }
+        ]
+      },
+      {
+        "key": "auctionHouses",
+        "label": "Auction houses",
+        "requiredFields": []
+      },
+      {
+        "key": "buyNowPayLater",
+        "label": "Buy Now Pay Later (BNPL)",
+        "requiredFields": [
+          { "field": "shopperEmail", "reason": "Compliance" },
+          { "field": "dateOfBirth", "reason": "Compliance" }
+        ]
+      },
+      {
+        "key": "carsNew",
+        "label": "Cars / trucks / car parts / tires - new",
+        "requiredFields": []
+      },
+      {
+        "key": "carsUsed",
+        "label": "Cars / trucks / car parts / tires - used",
+        "requiredFields": []
+      },
+      {
+        "key": "closedLoopStoredValue",
+        "label": "Closed-loop stored value (e.g. gift cards)",
+        "requiredFields": []
+      },
+      {
+        "key": "crowdfundingAFP",
+        "label": "Crowdfunding - AfP setup",
+        "requiredFields": []
+      },
+      {
+        "key": "crowdfundingPSP",
+        "label": "Crowdfunding - PSP setup",
+        "requiredFields": []
+      },
+      {
+        "key": "debtRepayment",
+        "label": "Debt repayment / Debt collection",
+        "requiredFields": []
+      },
+      {
+        "key": "financialServices",
+        "label": "Financial Services (including open loop stored value)",
+        "requiredFields": [
+          { "field": "billingAddress", "reason": "Compliance" }
+        ]
+      },
+      {
+        "key": "gamblingOffline",
+        "label": "Gambling - offline",
+        "requiredFields": []
+      },
+      {
+        "key": "gamblingOnlineHBR",
+        "label": "Gambling - Online - High-Brand Risk",
+        "requiredFields": []
+      },
+      {
+        "key": "gameOfSkillHBR",
+        "label": "Game of skill - High-Brand Risk",
+        "requiredFields": []
+      },
+      {
+        "key": "govLotteriesHBR",
+        "label": "Government-owned lotteries - High-Brand Risk",
+        "requiredFields": []
+      },
+      {
+        "key": "highValueFashion",
+        "label": "High value fashion, shoes, bags and accessories",
+        "requiredFields": []
+      },
+      {
+        "key": "highRiskTradingHBR",
+        "label": "High-risk security trading - High-Brand Risk",
+        "requiredFields": []
+      },
+      {
+        "key": "jewellery",
+        "label": "Jewellery, watch, precious stones, metals and silverware stores",
+        "requiredFields": []
+      },
+      {
+        "key": "lifeInsurance",
+        "label": "Life Insurance sales and premiums",
+        "requiredFields": []
+      },
+      {
+        "key": "liveStreaming",
+        "label": "Live streaming with in-app currency component",
+        "requiredFields": []
+      },
+      {
+        "key": "mvts",
+        "label": "Money Value Transfer Services (MVTS)",
+        "requiredFields": []
+      },
+      {
+        "key": "nonProfitDirectDonations",
+        "label": "Non-profit Organizations (NPOs) -Direct Donations",
+        "requiredFields": []
+      },
+      {
+        "key": "politicalReligiousSocial",
+        "label": "Political, religious or social campaigning",
+        "requiredFields": []
+      },
+      {
+        "key": "realEstate",
+        "label": "Real Estate",
+        "requiredFields": []
+      },
+      {
+        "key": "securityBrokers",
+        "label": "Security brokers and investments",
+        "requiredFields": []
+      },
+      {
+        "key": "virtualCurrencyExchangeHBR",
+        "label": "Virtual currency exchanges - High-Brand Risk",
+        "requiredFields": []
+      }
+    ],
+  
+    "scaCountries": [
+      "AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IS","IE","IT","LI","LV","LT","LU","MT","NL","NO","PL","PT","RO","SK","SI","ES","SE","IN"
+    ],
+  
+    "countryList": [
+      { "code": "",   "name": "Unknown/no selection" },
+      { "code": "AT", "name": "Austria (EEA)" },
+      { "code": "AU", "name": "Australia" },
+      { "code": "BE", "name": "Belgium (EEA)" },
+      { "code": "BG", "name": "Bulgaria (EEA)" },
+      { "code": "BH", "name": "Bahrain" },
+      { "code": "BR", "name": "Brazil" },
+      { "code": "CA", "name": "Canada" },
+      { "code": "CH", "name": "Switzerland (non-EEA)" },
+      { "code": "CY", "name": "Cyprus (EEA)" },
+      { "code": "CZ", "name": "Czech Republic (EEA)" },
+      { "code": "DE", "name": "Germany (EEA)" },
+      { "code": "DK", "name": "Denmark (EEA)" },
+      { "code": "EE", "name": "Estonia (EEA)" },
+      { "code": "ES", "name": "Spain (EEA)" },
+      { "code": "FI", "name": "Finland (EEA)" },
+      { "code": "FR", "name": "France (EEA)" },
+      { "code": "GB", "name": "United Kingdom" },
+      { "code": "GR", "name": "Greece (EEA)" },
+      { "code": "HK", "name": "Hong Kong" },
+      { "code": "HR", "name": "Croatia (EEA)" },
+      { "code": "HU", "name": "Hungary (EEA)" },
+      { "code": "IE", "name": "Ireland (EEA)" },
+      { "code": "IN", "name": "India" },
+      { "code": "IS", "name": "Iceland (EEA)" },
+      { "code": "IT", "name": "Italy (EEA)" },
+      { "code": "JP", "name": "Japan" },
+      { "code": "KW", "name": "Kuwait" },
+      { "code": "LI", "name": "Liechtenstein (EEA)" },
+      { "code": "LT", "name": "Lithuania (EEA)" },
+      { "code": "LU", "name": "Luxembourg (EEA)" },
+      { "code": "LV", "name": "Latvia (EEA)" },
+      { "code": "MT", "name": "Malta (EEA)" },
+      { "code": "MY", "name": "Malaysia" },
+      { "code": "NL", "name": "Netherlands (EEA)" },
+      { "code": "NO", "name": "Norway (EEA)" },
+      { "code": "NZ", "name": "New Zealand" },
+      { "code": "PL", "name": "Poland (EEA)" },
+      { "code": "PT", "name": "Portugal (EEA)" },
+      { "code": "RO", "name": "Romania (EEA)" },
+      { "code": "SE", "name": "Sweden (EEA)" },
+      { "code": "SG", "name": "Singapore" },
+      { "code": "SI", "name": "Slovenia (EEA)" },
+      { "code": "SK", "name": "Slovakia (EEA)" },
+      { "code": "US", "name": "United States" }
+    ]
+  }
+  

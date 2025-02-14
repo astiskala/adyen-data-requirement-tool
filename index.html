@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Adyen Payment Requirements</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Adyen Payment Requirements</h1>
+
+  <div class="container">
+    <!-- LEFT COLUMN: Selections -->
+    <div class="left-panel">
+      <!-- Merchant Industry -->
+      <div class="input-block">
+        <label for="industrySelect">Merchant Industry:</label>
+        <select id="industrySelect">
+          <option value="">-- Select Industry --</option>
+        </select>
+      </div>
+
+      <!-- Merchant Country -->
+      <div class="input-block">
+        <label for="countrySelect">Merchant Country:</label>
+        <select id="countrySelect">
+          <!-- We'll dynamically fill this from configData.countryList,
+               but we also keep a default placeholder. -->
+          <option value="">-- Select Country --</option>
+        </select>
+      </div>
+
+      <!-- 3D Secure -->
+      <div class="input-block">
+        <label for="threeDSecure">3D Secure (SCA) Required?</label>
+        <input type="checkbox" id="threeDSecure" />
+      </div>
+
+      <!-- Protect Level -->
+      <div class="input-block">
+        <label for="protectSelect">Adyen Protect level:</label>
+        <select id="protectSelect">
+          <option value="">-- Select Protect level --</option>
+          <option value="basic">Basic</option>
+          <option value="premium">Premium</option>
+        </select>
+      </div>
+
+      <!-- APMs -->
+      <div class="input-block" id="apmContainer">
+        <p>Alternative Payment Methods (APMs):</p>
+        <!-- APM checkboxes appear here once a country is selected -->
+      </div>
+
+      <!-- Button to Update -->
+      <button id="updateButton">Update Required Fields</button>
+    </div>
+
+    <!-- RIGHT COLUMN: TABS + Table/Payload -->
+    <div class="right-panel">
+      <!-- Tab Buttons -->
+      <div class="tabs-nav">
+        <button class="tab-button active" data-target="#fieldsTab">Required Fields</button>
+        <button class="tab-button" data-target="#payloadTab">Sample Payload</button>
+      </div>
+
+      <div id="fieldsTab" class="tab-content active">
+        <table id="fieldsTable">
+          <thead>
+            <tr>
+              <th>Property Name</th>
+              <th>Description</th>
+              <th>Sample Data</th>
+              <th>Usages</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dynamically filled by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="payloadTab" class="tab-content">
+        <pre id="samplePayload"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
