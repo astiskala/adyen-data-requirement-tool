@@ -1,0 +1,1 @@
+# adyen-data-requirement-tool
